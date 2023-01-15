@@ -1,0 +1,453 @@
+﻿@model NabidkaViewModel
+@{
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/Formular.css" />
+    <link rel="script" href=~/js/EmailValidation.js />
+    <title>Nová Nabídka</title>
+</head>
+
+<header class="nadpis">Nová Nabídka</header>
+
+<form method="post" asp-controller="Nabidka" asp-action="Create" enctype="multipart/form-data" id="nabidkaform">
+    <div>
+        <label asp-for="Okres">Okres</label>
+        <select asp-for="Okres" required>
+            <option value="Benešov">Benešov</option>
+            <option value="Beroun">Beroun</option>
+            <option value="Blansko">Blansko</option>
+            <option value="Brno-město">Brno-město</option>
+            <option value="Brno-venkov">Brno-venkov</option>
+            <option value="Bruntál">Bruntál</option>
+            <option value="Břeclav">Břeclav</option>
+            <option value="Česká Lípa">Česká Lípa</option>
+            <option value="České Budějovice">České Budějovice</option>
+            <option value="Český Krumlov">Český Krumlov</option>
+            <option value="Děčín">Děčín</option>
+            <option value="Domažlice">Domažlice</option>
+            <option value="Frýdek-Místek">Frýdek-Místek</option>
+            <option value="Havlíčkův Brod">Havlíčkův Brod</option>
+            <option value="Hodonín">Hodonín</option>
+            <option value="Hradec Králové">Hradec Králové</option>
+            <option value="Cheb">Cheb</option>
+            <option value="Chomutov">Chomutov</option>
+            <option value="Chrudim">Chrudim</option>
+            <option value="Jablonec nad Nisou">Jablonec nad Nisou</option>
+            <option value="Jeseník">Jeseník</option>
+            <option value="Jičín">Jičín</option>
+            <option value="Jihlava">Jihlava</option>
+            <option value="Jindříchův Hradec">Jindříchův Hradec</option>
+            <option value="Karlovy Vary">Karlovy Vary</option>
+            <option value="Karvina">Karvina</option>
+            <option value="Kladno">Kladno</option>
+            <option value="Klatovy">Klatovy</option>
+            <option value="Kolín">Kolín</option>
+            <option value="Kroměříž">Kroměříž</option>
+            <option value="Kutná Hora">Kutná Hora</option>
+            <option value="Liberec">Liberec</option>
+            <option value="Litoměřice">Litoměřice</option>
+            <option value="Louny">Louny</option>
+            <option value="Mělník">Mělník</option>
+            <option value="Mladá Boleslav">Mladá Boleslav</option>
+            <option value="Most">Most</option>
+            <option value="Náchod">Náchod</option>
+            <option value="Nový Jičín">Nový Jičín</option>
+            <option value="Nymburk">Nymburk</option>
+            <option value="Olomouc">Olomouc</option>
+            <option value="Opava">Opava</option>
+            <option value="Ostrava-město">Ostrava-město</option>
+            <option value="Pardubice">Pardubice</option>
+            <option value="Pelhřimov">Pelhřimov</option>
+            <option value="Písek">Písek</option>
+            <option value="Plzeň-jih">Plzeň-jih</option>
+            <option value="Plzeň-město">Plzeň-město</option>
+            <option value="Plzeň-sever">Plzeň-sever</option>
+            <option value="Praha">Praha</option>
+            <option value="Praha-východ">Praha-východ</option>
+            <option value="Praha-západ">Praha-západ</option>
+            <option value="Prachatice">Prachatice</option>
+            <option value="Prostějov">Prostějov</option>
+            <option value="Přerov">Přerov</option>
+            <option value="Příbram">Příbram</option>
+            <option value="Rakovník">Rakovník</option>
+            <option value="Rokycany">Rokycany</option>
+            <option value="Rychnov nad Kněžnou">Rychnov nad Kněžnou</option>
+            <option value="Semily">Semily</option>
+            <option value="Sokolov">Sokolov</option>
+            <option value="Strakonice">Strakonice</option>
+            <option value="Svitavy">Svitavy</option>
+            <option value="Šumperk">Šumperk</option>
+            <option value="Tachov">Tachov</option>
+            <option value="Tábor">Tábor</option>
+            <option value="Teplice">Teplice</option>
+            <option value="Trutnov">Trutnov</option>
+            <option value="Třebíč">Třebíč</option>
+            <option value="Uherské Hradiště">Uherské Hradiště</option>
+            <option value="Ústí nad Labem">Ústí nad Labem</option>
+            <option value="Ústí nad Orlicí">Ústí nad Orlicí</option>
+            <option value="Vsetín">Vsetín</option>
+            <option value="Výškov">Výškov</option>
+            <option value="Zlín">Zlín</option>
+            <option value="Znojmo">Znojmo</option>
+            <option value="Žďár nad Sázavou">Žďár nad Sázavou</option>
+        </select>
+        <span asp-validation-for="Okres"></span>
+    </div>
+
+    <div>
+        <label asp-for="Lokalita">Lokalita</label>
+        <input asp-for="Lokalita" />
+        <span asp-validation-for="Lokalita"></span>
+    </div>
+
+    <div>
+        <label>E-mail</label>
+        <input asp-for="Email" id="mailvalidation" type="email" required />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div>
+        <label asp-for="Telefon">Telefon</label>
+        <input asp-for="Telefon" id="telefon-validation" onblur="this.value = removeSpaces(this.value);" placeholder="+420 777 777 777" type="text" required />
+        <span asp-validation-for="Telefon" required></span>
+    </div>
+
+    <div>
+        <label asp-for="Cena">Celkový měsíční nájem (Kč)</label>
+        <input asp-for="Cena" onblur="this.value = removeSpaces(this.value);" type="number" required />
+        <span asp-validation-for="Cena" ></span>
+    </div>
+
+    <div class="select">
+        <div>
+            <label asp-for="Mistnosti">Počet místností</label>
+            <input asp-for="Mistnosti" onblur="this.value = removeSpaces(this.value);" required />
+            <span asp-validation-for="Mistnosti" required></span>
+        </div>
+
+        <div >
+            <label asp-for="Podlazi">Podlaží</label>
+            <input asp-for="Podlazi" onblur="this.value = removeSpaces(this.value);" type="number" required />
+            <span asp-validation-for="Podlazi" required></span>
+        </div>
+    </div>
+
+    <div class="select">
+        <div>
+            <label asp-for="CelkoveMetry">Celková plocha (m&#178;)</label>
+            <input asp-for="CelkoveMetry" onblur="this.value = removeSpaces(this.value);" type="number" required />
+            <span asp-validation-for="CelkoveMetry" required></span>
+        </div>
+
+        <div>
+            <label asp-for="MetryPokoje">Plocha pokoje (m&#178;)</label>
+            <input asp-for="MetryPokoje" onblur="this.value = removeSpaces(this.value);" type="number" required />
+            <span asp-validation-for="MetryPokoje" required></span>
+        </div>
+    </div>
+
+    <div class="select">
+        <div>
+            <label asp-for="Typ">Typ </label>
+            <select asp-for="Typ">
+                <option value="Dům">Dům</option>
+                <option value="Byt">Byt</option>
+                <option value="Jiné">Jiné</option>
+            </select>
+            <span asp-validation-for="Typ"></span>
+        </div>
+
+        <div>
+            <label asp-for="Vybaveno">Vybaveno </label>
+            <select asp-for="Vybaveno">
+                <option value="Ano">Ano</option>
+                <option value="Ne">Ne</option>
+            </select>
+            <span asp-validation-for="Vybaveno"></span>
+        </div>
+    </div>
+
+    <div class="select">
+        <div>
+            <label asp-for="Internet">Internet </label>
+            <select asp-for="Internet">
+                <option value="Ano">Ano</option>
+                <option value="Ne">Ne</option>
+            </select>
+            <span asp-validation-for="Internet"></span>
+        </div>
+
+        <div>
+            <label asp-for="Wifi">Wifi </label>
+            <select asp-for="Wifi">
+                <option value="Ano">Ano</option>
+                <option value="Ne">Ne</option>
+            </select>
+            <span asp-validation-for="Wifi"></span>
+        </div>
+    </div>
+
+    <div class="select">
+        <div id="zvire-byt">
+            <label asp-for="ZvireByt">V objektu je zvíře </label>
+            <select asp-for="ZvireByt">
+                <option value="Ano">Ano</option>
+                <option value="Ne">Ne</option>
+            </select>
+            <span asp-validation-for="ZvireByt"></span>
+        </div>
+
+        <div>
+            <label asp-for="SvojeZvire">Spolubydlící může mít zvíře </label>
+            <select asp-for="SvojeZvire">
+                <option value="Ano">Ano</option>
+                <option value="Ne">Ne</option>
+            </select>
+            <span asp-validation-for="SvojeZvire"></span>
+        </div>
+    </div>
+
+    <div>
+        <label asp-for="DatumNastehovani">Datum nastěhování</label>
+        <input asp-for="DatumNastehovani" type="date" required />
+        <span asp-validation-for="DatumNastehovani"></span>
+    </div>
+
+    <div id="text">
+        <label>Text</label>
+        <textarea asp-for="Text" oninput="auto_grow(this)" required></textarea>
+        <span asp-validation-for="Text"></span>
+    </div>
+
+    <div id="fotografie">
+        <label>Titulní Fotografie - povinná (&nbsp;jpg&nbsp;-&nbsp;jpeg&nbsp;-&nbsp;png)&nbsp;&nbsp;max.&nbsp;20&nbsp;MB</label>
+        <input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" />
+        <span asp-validation-for="TitulObrBase64"></span>
+        <img id="preview" onerror="this.style.display = 'none'" />
+        <button type="button" id="remove" class="remove">Odstranit obrázek</button>
+    </div>
+
+    <div>
+        <label>Ostatní fotografie (&nbsp;jpg&nbsp;-&nbsp;jpeg&nbsp;-&nbsp;png)&nbsp;&nbsp;</label>
+        <input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input-multiple" multiple/>
+        <span asp-validation-for="Base64s"></span>
+        <div id="preview-multiple">
+
+        </div>
+    </div>
+
+    <!--<div class="fotografie">
+        <label>Ostatní obrázky</label>
+        <div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+        </div>
+
+        <div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+        </div>
+
+        <div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+        </div>
+
+        <div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+        </div>
+
+        <div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+        </div>
+
+        <div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+            <div><input type="file" style="color:white" accept="image/png, image/jpg, image/jpeg" id="img-input" /></div>
+        </div>
+    </div>-->
+    @if (ViewBag.Message != null)
+    {
+        <div class="error">@ViewBag.Message</div>
+    }
+
+    <div style="display: none;">
+        <label asp-for="TitulObrBase64">Base64</label>
+        <input asp-for="TitulObrBase64" type="text" id="base64" />
+        <label asp-for="Base64s">Base64s</label>
+        <input asp-for="Base64s" type="text" id="base64s" />
+    </div>
+
+    <button type="submit" id="submit" form="nabidkaform" enctype="multipart/form-data">Vytvořit</button>
+</form>
+<script>
+    let imgInput = document.getElementById("img-input");
+    let imgInputed = document.getElementById("InputedImg");
+    let preview = document.getElementById("preview");
+    let MAX_WIDTH = 1440;
+    let MAX_HEIGHT = 1440;
+
+    function removeSpaces(string) {
+        return string.split(' ').join('');
+    }
+
+    function auto_grow(element) {
+        element.style.height = "3rem";
+        element.style.height = (element.scrollHeight) + "px";
+    }
+
+    let remove = document.getElementById("remove");
+    let base64 = document.getElementById("base64");
+
+    remove.onclick = function () {
+        preview.src = "";
+        base64.value = "";
+        remove.style.display = "none";
+    };
+
+    imgInput.onchange = function () {
+        if (this.files[0].size > 20971520) {
+            alert("Obrázek je příliš velký");
+            this.value = "";
+            return false;
+        };
+
+        let filePath = imgInput.value;
+        let allowedExtensions = /(\.png|\.jpg|\.jpeg)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Špatný formát vloženého obrázku');
+            imgInput.value = '';
+            return false;
+        }
+    };
+
+    window.onload = function () {
+        let fileUpload = document.getElementById("img-input-multiple");
+        let dvPreview = document.getElementById("preview-multiple");
+        fileUpload.onchange = function () {
+            if (typeof (FileReader) != "undefined") {
+                const regex = /(\.png|\.jpg|\.jpeg)$/i;
+                for (let i = 0; i < fileUpload.files.length; i++) {
+                    let file = fileUpload.files[i];
+                    if (regex.test(file.name.toLowerCase())) {
+                        let reader = new FileReader();
+                        reader.onload = function (e) {
+                            let imgBox = document.createElement("div");
+                            imgBox.className = "box"
+                            let close = document.createElement("button");
+                            close.type = "button";
+                            close.className = "close"
+                            close.onclick = function() { return this.parentNode.remove(); }
+                            let inputedImg = document.createElement("img");
+                            inputedImg.src = e.target.result;
+                            
+                            inputedImg.onload = function (event) {
+                                let img = document.createElement("img");
+                                img.className = "img-multiple";
+
+                                let width = inputedImg.naturalWidth;
+                                let height = inputedImg.naturalHeight;
+
+                                if (width > height) {
+                                    if (width > MAX_WIDTH) {
+                                        height *= MAX_WIDTH / width;
+                                        width = MAX_WIDTH;
+                                    }
+                                } else {
+                                    if (height > MAX_HEIGHT) {
+                                        width *= MAX_HEIGHT / height;
+                                        height = MAX_HEIGHT;
+                                    }
+                                }
+
+                                let canvas = document.createElement("canvas");
+                                let ctx = canvas.getContext("2d");
+                                canvas.width = width;
+                                canvas.height = height
+                                ctx.drawImage(inputedImg, 0, 0, canvas.width, canvas.height);
+
+                                let dataurl = canvas.toDataURL(file.type)
+                                img.src = dataurl;
+                                dvPreview.appendChild(imgBox);
+                                imgBox.appendChild(img);
+                                imgBox.appendChild(close);
+                            }
+                        }
+                        reader.readAsDataURL(file);
+                    } else {
+                        alert(file.name + " is not a valid image file.");
+                        dvPreview.innerHTML = "";
+                        return false;
+                    }
+                }
+            } else {
+                alert("This browser does not support HTML5 FileReader.");
+            }
+        }
+
+
+        let subm = document.getElementById("submit");
+
+        subm.onclick = function () {
+            let base64s = document.getElementsByClassName("img-multiple");
+            let base64sInput = document.getElementById("base64s");
+            base64sInput.value = "";
+
+            for (let i = 0; base64s.length; i++) {
+                base64sInput.value += base64s[i].src + "|";
+            }
+
+        }
+    };
+
+    imgInput.addEventListener('change', function (e) {
+        if (e.target.files) {
+            let imageFile = e.target.files[0];
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                let img = document.createElement("img");
+                img.onload = function (event) {
+                    let canvas = document.createElement("canvas");
+                    let ctx = canvas.getContext("2d");
+
+                    let img = document.createElement("img");
+                    img.src = e.target.result;
+
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // Show resized image in preview element
+                    let dataurl = canvas.toDataURL(imageFile.type);
+                    preview.src = dataurl;
+                    preview.style.display = "block";
+                    base64input = document.getElementById("base64");
+                    base64input.value = dataurl;
+                }
+                img.src = e.target.result;
+                preview.src = e.target.result;
+                remove.style.display = "block";
+            }
+            reader.readAsDataURL(imageFile);
+        }
+    });
+</script>
