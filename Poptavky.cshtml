@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Poptavka>
+
+<head>
+    <link rel="stylesheet" href="~/css/poptavka/poptavky.css"/>
+    <title>Poptávky</title>
+</head>
+
+<div class="rozlozeni">
+    @foreach(var obj in Model)
+    {
+    <a asp-controller="Poptavka" asp-action="Poptavka" asp-route-id="@obj.Id">
+        <div class="box">
+                <img src="~/UserImgs/Poptavka/@obj.Id/minimg.jpeg?@obj.DatumPosledniZmeny.ToString(" yyyy-MM-dd HH-mm-ss")" onerror="this.style.display = 'none'" />
+            <p class="text">@obj.Text</p>
+        </div>
+    </a>
+    }
+</div>
+
+
